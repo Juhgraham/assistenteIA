@@ -1,50 +1,59 @@
-# 🤖 Assistente IA
+# Assistente IA
 
-Um assistente de IA simples no terminal usando a API gratuita do Groq com o modelo LLaMA 3.
+Assistente de conversa em Python que funciona no terminal. Ele usa a API da Groq para consultar o modelo Llama 3.3 70B (`llama-3.3-70b-versatile`) e mantém o histórico em memória enquanto o programa está aberto.
 
-## 🚀 Como usar
+## Pré-requisitos
 
-### 1. Clone o repositório
-```bash
-git clone https://github.com/seu-usuario/assistenteIA.git
+- Python 3 com pip
+- Git
+- Uma chave de API criada na seção **API Keys** do [console da Groq](https://console.groq.com)
+
+## Instalação
+
+Clone o repositório e crie um ambiente virtual.
+
+```sh
+git clone https://github.com/Juhgraham/assistenteIA.git
 cd assistenteIA
+python -m venv .venv
 ```
 
-### 2. Instale as dependências
-```bash
-pip install -r requirements.txt
+No Windows (PowerShell), instale as dependências e copie o arquivo de configuração.
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+Copy-Item .env.example .env
 ```
 
-### 3. Crie sua chave de API gratuita
-- Acesse [console.groq.com](https://console.groq.com)
-- Crie uma conta (pode entrar com Google)
-- Vá em **API Keys** → **Create API Key**
-- Copie a chave gerada
+No macOS ou Linux, use os comandos abaixo. Se o comando `python` não estiver disponível, use `python3` para criar o ambiente virtual.
 
-### 4. Adicione sua chave no código
-Abra o arquivo `main.py` e substitua no campo `api_key`:
-```python
-client = Groq(api_key="cole_sua_chave_aqui")
+```sh
+./.venv/bin/python -m pip install -r requirements.txt
+cp .env.example .env
 ```
 
-### 5. Execute
-```bash
-python main.py
+## Configuração da chave
+
+Abra o arquivo `.env` na pasta do projeto e preencha `GROQ_API_KEY` com a chave gerada no console da Groq.
+
+```dotenv
+GROQ_API_KEY=sua_chave_aqui
 ```
 
-## 💬 Como funciona
+O Git ignora o arquivo `.env`. Mantenha sua chave nesse arquivo local ou configure `GROQ_API_KEY` diretamente no ambiente. Se a variável já estiver definida no ambiente, ela tem prioridade sobre o arquivo.
 
-- Digite sua mensagem e pressione Enter
-- O assistente responde usando o modelo **LLaMA 3.3 70B** via Groq
-- O histórico da conversa é mantido durante a sessão
-- Digite `sair` para encerrar
+## Como usar
 
-## 📦 Tecnologias
+No Windows (PowerShell):
 
-- [Python](https://www.python.org/)
-- [Groq API](https://console.groq.com) — gratuita, sem cartão
-- [LLaMA 3.3 70B](https://groq.com) — modelo de linguagem da Meta
+```powershell
+.\.venv\Scripts\python.exe main.py
+```
 
-## ⚠️ Atenção
+No macOS ou Linux:
 
-Nunca compartilhe seu `api_key` publicamente. Cada um deve usar sua própria chave gerada no Groq.
+```sh
+./.venv/bin/python main.py
+```
+
+Digite uma mensagem e pressione Enter. A cada pergunta, o programa envia o histórico da sessão à Groq para que o modelo possa usar o contexto da conversa. Digite `sair` para encerrar e descartar o histórico local.

@@ -1,10 +1,20 @@
+import os
+from pathlib import Path
+
+from dotenv import load_dotenv
 from groq import Groq
 
-client = Groq(api_key="coloque sua chave aqui, no readme tem as instruções")
+load_dotenv(Path(__file__).with_name(".env"))
+
+api_key = os.getenv("GROQ_API_KEY", "").strip()
+if not api_key:
+    raise SystemExit("Configure GROQ_API_KEY no arquivo .env ou no ambiente antes de executar.")
+
+client = Groq(api_key=api_key)
 
 historico = []
 
-print("🤖 Assistente IA iniciado! Digite 'sair' para encerrar.")
+print("Assistente IA iniciado! Digite 'sair' para encerrar.")
 
 while True:
     pergunta = input("\nVocê: ")
